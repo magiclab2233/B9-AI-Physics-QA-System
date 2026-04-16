@@ -1,0 +1,4 @@
+include:
+  - project: "innoflow/devops-cicd"
+    ref: main
+    file: "/ci/templates/ci-build-deploy-new.yaml"

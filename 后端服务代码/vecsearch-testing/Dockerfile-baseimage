@@ -1,0 +1,24 @@
+# 使用Python 3.10作为基础镜像
+FROM registry.sensetime.com/sensestudy/python:3.10-slim
+
+# 设置工作目录
+WORKDIR /app
+
+# 安装系统依赖
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# 复制依赖文件
+COPY requirements.txt .
+
+# 安装Python依赖
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 镜像 metadata
+LABEL description="Base image with system dependencies and Python packages pre-installed."
+
+# 最后，清理不必要内容，镜像更小（可选）
+RUN rm -f requirements.txt
